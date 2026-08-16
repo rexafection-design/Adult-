@@ -2,14 +2,16 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #0d0b12; color: #f8f5fb; }
 a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
 .hero { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 72px 24px; background: radial-gradient(circle at 50% 15%, #4a183c 0, #1b1020 38%, #0d0b12 72%); }
-.badge { border: 1px solid #8e5b7f; border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.badge { display: inline-block; border: 1px solid #8e5b7f; border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
 h1 { max-width: 850px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 82px); line-height: .98; letter-spacing: -.05em; }
-.hero p { max-width: 650px; color: #cfc6d2; font-size: 19px; line-height: 1.6; }
+.hero p, .gate-card > p, .profile-card > p { max-width: 650px; color: #cfc6d2; font-size: 19px; line-height: 1.6; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
 .primary, .secondary { display: inline-block; border-radius: 12px; padding: 14px 22px; font-weight: 700; }
-.primary { background: #f4c7e3; color: #24121f; }
+.primary { background: #f4c7e3; color: #24121f; border: 0; }
 .secondary { border: 1px solid #574552; color: #fff; }
+.button { cursor: pointer; width: 100%; margin-top: 12px; }
 .small { font-size: 13px !important; margin-top: 18px; }
 .features { max-width: 1100px; margin: 0 auto; padding: 70px 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .features article { background: #17121b; border: 1px solid #2b2230; border-radius: 20px; padding: 28px; }
@@ -19,4 +21,13 @@ h1 { max-width: 850px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 82px); l
 .join { margin: 20px auto 80px; max-width: 760px; text-align: center; padding: 50px 24px; }
 .join h2 { font-size: 40px; margin-bottom: 10px; }
 .join .primary { margin-top: 18px; }
-@media (max-width: 760px) { .features { grid-template-columns: 1fr; } h1 { font-size: 52px; } }
+.gate-page, .profile-page { min-height: 100vh; display: grid; place-items: center; padding: 28px 18px; background: radial-gradient(circle at 50% 10%, #3a1530, #0d0b12 60%); }
+.gate-card, .profile-card { width: min(100%, 560px); background: #17121b; border: 1px solid #332636; border-radius: 24px; padding: 34px; box-shadow: 0 24px 80px rgba(0,0,0,.35); }
+.gate-card h1, .profile-card h1 { font-size: clamp(42px, 10vw, 62px); margin: 18px 0 12px; }
+.gate-card label, .profile-card label { display: block; margin: 18px 0 8px; font-weight: 700; }
+.gate-card input, .profile-card input, .profile-card select, .profile-card textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #49384a; background: #0f0c13; color: #fff; outline: none; }
+.profile-card textarea { min-height: 120px; resize: vertical; }
+.error { color: #ff9a9a !important; font-size: 14px !important; }
+.success { margin-top: 18px; padding: 14px; border-radius: 12px; background: #1c3428; color: #bce8c8; line-height: 1.5; }
+.gate-card .secondary { display: block; text-align: center; margin-top: 12px; }
+@media (max-width: 760px) { .features { grid-template-columns: 1fr; } h1 { font-size: 52px; } .gate-card, .profile-card { padding: 24px; } }
