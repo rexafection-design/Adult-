@@ -22,12 +22,20 @@ h1 { max-width: 850px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 82px); l
 .join h2 { font-size: 40px; margin-bottom: 10px; }
 .join .primary { margin-top: 18px; }
 .gate-page, .profile-page { min-height: 100vh; display: grid; place-items: center; padding: 28px 18px; background: radial-gradient(circle at 50% 10%, #3a1530, #0d0b12 60%); }
-.gate-card, .profile-card { width: min(100%, 560px); background: #17121b; border: 1px solid #332636; border-radius: 24px; padding: 34px; box-shadow: 0 24px 80px rgba(0,0,0,.35); }
-.gate-card h1, .profile-card h1 { font-size: clamp(42px, 10vw, 62px); margin: 18px 0 12px; }
+.gate-card, .profile-card, .discover-card { width: min(100%, 560px); background: #17121b; border: 1px solid #332636; border-radius: 24px; padding: 34px; box-shadow: 0 24px 80px rgba(0,0,0,.35); }
+.gate-card h1, .profile-card h1, .discover-card h1 { font-size: clamp(42px, 10vw, 62px); margin: 18px 0 12px; }
 .gate-card label, .profile-card label { display: block; margin: 18px 0 8px; font-weight: 700; }
 .gate-card input, .profile-card input, .profile-card select, .profile-card textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #49384a; background: #0f0c13; color: #fff; outline: none; }
 .profile-card textarea { min-height: 120px; resize: vertical; }
 .error { color: #ff9a9a !important; font-size: 14px !important; }
 .success { margin-top: 18px; padding: 14px; border-radius: 12px; background: #1c3428; color: #bce8c8; line-height: 1.5; }
 .gate-card .secondary { display: block; text-align: center; margin-top: 12px; }
-@media (max-width: 760px) { .features { grid-template-columns: 1fr; } h1 { font-size: 52px; } .gate-card, .profile-card { padding: 24px; } }
+.discover-top { display: flex; justify-content: space-between; align-items: center; color: #bdb3c1; }
+.avatar { width: 150px; height: 150px; margin: 34px auto 22px; border-radius: 50%; display: grid; place-items: center; font-size: 62px; font-weight: 800; background: linear-gradient(135deg,#f4c7e3,#6e3a62); color: #24121f; }
+.discover-card { text-align: center; }
+.location { color: #dba7ca; font-weight: 700; }
+.bio { color: #cfc6d2; line-height: 1.6; min-height: 52px; }
+.discover-actions { display: flex; justify-content: center; gap: 28px; margin: 28px 0 10px; }
+.pass, .like { width: 70px; height: 70px; border-radius: 50%; cursor: pointer; font-size: 30px; border: 1px solid #49384a; background: #0f0c13; color: #fff; }
+.like { background: #f4c7e3; color: #24121f; border: 0; }
+@media (max-width: 760px) { .features { grid-template-columns: 1fr; } h1 { font-size: 52px; } .gate-card, .profile-card, .discover-card { padding: 24px; } }
