@@ -1,50 +1,31 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '../../lib/supabase';
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [goal, setGoal] = useState('Serious relationship');
-  const [bio, setBio] = useState('');
-  const [saved, setSaved] = useState(false);
+  const [name,setName]=useState(''); const [city,setCity]=useState('');
+  const [goal,setGoal]=useState('Serious relationship'); const [bio,setBio]=useState('');
+  const [email,setEmail]=useState(''); const [saved,setSaved]=useState(false); const [error,setError]=useState(''); const [busy,setBusy]=useState(true);
 
-  useEffect(() => {
-    if (localStorage.getItem('adult_age_verified') !== 'true') router.replace('/age-gate');
-  }, [router]);
+  useEffect(()=>{ (async()=>{ const {data:{user}}=await supabase.auth.getUser(); if(!user){router.replace('/auth');return;} setEmail(user.email ?? ''); const p=user.user_metadata ?? {}; setName(p.name ?? ''); setCity(p.city ?? ''); setGoal(p.goal ?? 'Serious relationship'); setBio(p.bio ?? ''); setBusy(false); })(); },[router]);
 
-  function saveProfile(e: React.FormEvent) {
-    e.preventDefault();
-    if (!name.trim() || !city.trim()) return;
-    localStorage.setItem('adult_profile', JSON.stringify({ name, city, goal, bio }));
-    setSaved(true);
-  }
+  async function saveProfile(e:FormEvent){ e.preventDefault(); setError(''); setSaved(false); if(!name.trim()||!city.trim()) return; setBusy(true); const {error}=await supabase.auth.updateUser({data:{name:name.trim(),city:city.trim(),goal,bio:bio.trim()}}); if(error)setError(error.message); else setSaved(true); setBusy(false); }
+  async function signOut(){await supabase.auth.signOut(); router.replace('/');}
+  if(busy && !email) return <main className="profile-page"><section className="profile-card"><p>Loading your account…</p></section></main>;
 
-  return (
-    <main className="profile-page">
-      <section className="profile-card">
-        <div className="badge">YOUR PROFILE</div>
-        <h1>Tell people what makes you, you.</h1>
-        <p>Start with the basics. We will use your preferences later to improve compatibility.</p>
-        <form onSubmit={saveProfile}>
-          <label htmlFor="name">First name</label>
-          <input id="name" value={name} onChange={e => setName(e.target.value)} placeholder="Your first name" required />
-          <label htmlFor="city">City</label>
-          <input id="city" value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Benin City" required />
-          <label htmlFor="goal">Relationship goal</label>
-          <select id="goal" value={goal} onChange={e => setGoal(e.target.value)}>
-            <option>Serious relationship</option>
-            <option>Dating</option>
-            <option>Friendship</option>
-          </select>
-          <label htmlFor="bio">Short bio</label>
-          <textarea id="bio" value={bio} onChange={e => setBio(e.target.value)} maxLength={300} placeholder="A few things you'd like a match to know..." />
-          <button className="primary button" type="submit">Save profile</button>
-        </form>
-        {saved && <div className="success">Profile saved on this device. Next we'll connect this to your account and database.</div>}
-      </section>
-    </main>
-  );
+  return <main className="profile-page"><section className="profile-card">
+    <div className="badge">YOUR PROFILE</div><h1>Tell people what makes you, you.</h1><p>Signed in as {email}. Your profile is saved to your account.</p>
+    <form onSubmit={saveProfile}>
+      <label htmlFor="name">First name</label><input id="name" value={name} onChange={e=>setName(e.target.value)} required />
+      <label htmlFor="city">City</label><input id="city" value={city} onChange={e=>setCity(e.target.value)} placeholder="e.g. Benin City" required />
+      <label htmlFor="goal">Relationship goal</label><select id="goal" value={goal} onChange={e=>setGoal(e.target.value)}><option>Serious relationship</option><option>Dating</option><option>Friendship</option></select>
+      <label htmlFor="bio">Short bio</label><textarea id="bio" value={bio} onChange={e=>setBio(e.target.value)} maxLength={300} placeholder="A few things you'd like a match to know..." />
+      {error&&<p className="error">{error}</p>}{saved&&<div className="success">Profile saved to your account.</div>}
+      <button className="primary button" disabled={busy}>{busy?'Saving…':'Save profile'}</button>
+    </form>
+    <button className="secondary button" onClick={signOut}>Sign out</button>
+  </section></main>;
 }
