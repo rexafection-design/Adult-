@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Category = "For You" | "Entertainment" | "Relationships" | "Community" | "Events";
 type Post = { id: number; category: Exclude<Category, "For You">; label: string; title: string; body: string; author: string; time: string; likes: number; comments: number; };
@@ -15,6 +15,7 @@ const seedPosts: Post[] = [
 const categories: Category[] = ["For You", "Entertainment", "Relationships", "Community", "Events"];
 
 export default function FeedApp() {
+  const [agePassed, setAgePassed] = useState(false);
   const [active, setActive] = useState<Category>("For You");
   const [liked, setLiked] = useState<number[]>([]);
   const [showComposer, setShowComposer] = useState(false);
@@ -22,6 +23,8 @@ export default function FeedApp() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => { setAgePassed(window.localStorage.getItem("adult_age_verified") === "true"); }, []);
 
   const visible = useMemo(() => active === "For You" ? seedPosts : seedPosts.filter(p => p.category === active), [active]);
 
