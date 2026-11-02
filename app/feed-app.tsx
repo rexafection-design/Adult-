@@ -39,7 +39,7 @@ export default function FeedApp() {
       <header className="topbar">
         <a className="brand" href="/" aria-label="Pulse Naija home"><span className="brand-mark">P</span><span>pulse<span className="brand-accent">naija</span></span></a>
         <nav className="desktop-nav"><a href="#feed">Explore</a><a href="#events">Events</a><a href="#community">Community</a></nav>
-        <div className="top-actions"><span className="adult-tag">18+ COMMUNITY</span><a className="login-link" href="#join">Join the conversation</a></div>
+        <div className="top-actions"><span className="adult-tag">18+ COMMUNITY</span><a className="login-link" href="#feed">Join the conversation</a></div>
       </header>
 
       <section className="welcome">
@@ -79,8 +79,8 @@ export default function FeedApp() {
 
         <aside className="side-column">
           <section className="side-card" id="events"><div className="side-title"><span className="side-icon">✦</span><h3>What’s on</h3></div><p className="side-intro">A place for gigs, pop-ups, comedy, festivals and local happenings.</p><div className="event-placeholder"><span className="event-date">EVENTS</span><strong>Discover what’s happening near you</strong><small>Real listings will appear after organiser submissions are reviewed.</small></div><button className="outline-btn" onClick={() => { setKind("Event"); setShowComposer(true); setSubmitted(false); }}>＋ Submit an event</button></section>
-          <section className="side-card" id="community"><div className="side-title"><span className="side-icon">◎</span><h3>Community rules</h3></div><ul className="rules"><li>Adults 18 and over only.</li><li>Respect consent and personal boundaries.</li><li>No harassment, threats or hate.</li><li>No scams, illegal drug sales or exploitation.</li><li>Never share someone’s private or intimate content without consent.</li></ul><a className="text-link" href="mailto:hello@pulsen.ai?subject=Safety%20report">Report a safety concern ↗</a></section>
-          <section className="side-card sponsor-card"><p className="eyebrow">FOR BRANDS & ORGANISERS</p><h3>Reach people who care about culture.</h3><p>Sponsored stories and promoted event listings will be available after launch.</p><a className="text-link" href="mailto:partnerships@pulsen.ai">Explore partnerships ↗</a></section>
+          <section className="side-card" id="community"><div className="side-title"><span className="side-icon">◎</span><h3>Community rules</h3></div><ul className="rules"><li>Adults 18 and over only.</li><li>Respect consent and personal boundaries.</li><li>No harassment, threats or hate.</li><li>No scams, illegal drug sales or exploitation.</li><li>Never share someone’s private or intimate content without consent.</li></ul><p className="text-link">Safety reporting will be available before public launch.</p></section>
+          <section className="side-card sponsor-card"><p className="eyebrow">FOR BRANDS & ORGANISERS</p><h3>Reach people who care about culture.</h3><p>Sponsored stories and promoted event listings will be available after launch.</p><p className="text-link">Partnership enquiries will open after the brand contact channel is verified.</p></section>
         </aside>
       </div>
       <footer className="footer"><a className="brand" href="/"><span className="brand-mark">P</span><span>pulse<span className="brand-accent">naija</span></span></a><span>Made for conversations that move culture.</span><span>18+ · Community guidelines · Privacy</span></footer>
